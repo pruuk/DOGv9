@@ -31,12 +31,13 @@ class BonusRoller:
         Rerolls can only happen up to 5 times for a given die. """
         roll_count = 5
         while roll_count > 0:
-            roll = random.randint(0, number + 1)
+            roll = random.randint(1, number)
             self.total += roll
-            if roll == number + 1:
+            if roll == number:
                 roll_count -= 1
             else:
                 roll_count = 0
+
 
     def roll(self, dice_dictionary):
         """ rolls bonus by calling roll_one_die a given number of times.

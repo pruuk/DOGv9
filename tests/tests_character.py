@@ -5,6 +5,7 @@ methods, character death, and character crafting."""
 from evennia.utils.test_resources import LocalEvenniaTest
 from typeclasses.characters import Character
 import unittest
+from evennia.utils.logger import log_file
 
 class TestCharacterCreation(LocalEvenniaTest):
     """ Instantiate a character and test to ensure the character has all
@@ -14,6 +15,7 @@ class TestCharacterCreation(LocalEvenniaTest):
     def test_if_character_has_dex_score(self):
         self.assertIsInstance(self.char1.ability_scores.Dex.actual, int)
         self.assertGreater(self.char1.ability_scores.Dex.actual, 0)
+        log_file('Testing initialization of ability scores on test char1', filename='test_log.log')
 
     def test_if_character_has_str_score(self):
         self.assertIsInstance(self.char1.ability_scores.Str.actual, int)

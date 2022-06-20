@@ -118,7 +118,7 @@ Example:
             >>> carry.current = 10000        # set a semi-large value
             >>> carry                        # still have the modifier
             'Carry Weight        9995 ( -5)'
-            >>> carry.reset()                # remove modifier
+            >>> carry.reset_mod()                # remove modifier
             >>> carry
             'Carry Weight        10000 ( +0)'
             >>> carry.reset_counter()
