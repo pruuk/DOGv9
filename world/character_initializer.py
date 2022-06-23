@@ -37,3 +37,37 @@ def initialize_character(character):
     character.statuses.add(key="cp", name="Conviction Points", type="gauge", \
                         base=((character.ability_scores.Wil.current * 5) + \
                         (character.ability_scores.Vit.current)), extra={'learn' : 0})
+
+    # Set status for height, mass, encumberance
+    ability_roller.reset_total()
+    ability_roller.add_base(75) # average mass in kilograms
+    character.statuses.add(key="mass", name="Mass", type="static", \
+                        base=ability_roller.total)
+    ability_roller.reset_total()
+    ability_roller.add_base(175) # average height in centimeters
+    character.statuses.add(key="height", name="Height", type="static", \
+                        base=ability_roller.total)
+    # Encumberance measures a character's carrying capacity. Some items
+    # may be lighter or heavier in emcumberance than their mass would suggest
+    # because they are easier to carry or are inside a container
+    character.statuses.add(key="enc", name="Encumberance", type="counter", \
+                        max=character.ability_scores.Str.current / 2.0)
+
+    # Initialize character equipment slots
+    character.db.eq_slots = {
+        'head': None,
+        'face': None,
+        'ears': None,
+        'neck': None,
+        'chest': None,
+        'back': None,
+        'waist': None,
+        'quiver': None,
+        'shoulders': None,
+        'arms': None,
+        'hands': None,
+        'legs': None,
+        'feet': None,
+        'primary hand': None,
+        'secondary hand': None
+    }

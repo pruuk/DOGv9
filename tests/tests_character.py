@@ -12,6 +12,7 @@ class TestCharacterCreation(LocalEvenniaTest):
     required information attached to character at creation, such as ability
     scores, health, etc. """
 
+    # tests for ability scores
     def test_if_character_has_dex_score(self):
         self.assertIsInstance(self.char1.ability_scores.Dex.actual, int)
         self.assertGreater(self.char1.ability_scores.Dex.actual, 0)
@@ -33,17 +34,37 @@ class TestCharacterCreation(LocalEvenniaTest):
         self.assertIsInstance(self.char1.ability_scores.Wil.actual, int)
         self.assertGreater(self.char1.ability_scores.Wil.actual, 0)
 
+    # tests for status scores
     def test_if_character_hp_correct(self):
-        self.assertIsIstance(self.char1.statuses.hp.actual, int)
-        self.assetAlmostEqual(self.char1.statuses.hp.actual, ((self.char1.ability_scores.Vit.current * 5) + \
+        self.assertIsInstance(self.char1.statuses.hp.actual, int)
+        self.assertAlmostEqual(self.char1.statuses.hp.actual, \
+            ((self.char1.ability_scores.Vit.current * 5) + \
             (self.char1.ability_scores.Wil.current * 2)))
 
     def test_if_character_sp_correct(self):
-        self.assertIsIstance(self.char1.statuses.sp.actual, int)
-        self.assetAlmostEqual(self.char1.statuses.sp.actual, ((self.char1.ability_scores.Vit.current * 3) + \
-            (self.char1.ability_scores.Str.current * 2)))
+        self.assertIsInstance(self.char1.statuses.sp.actual, int)
+        self.assertAlmostEqual(self.char1.statuses.sp.actual, \
+            ((self.char1.ability_scores.Vit.current * 3) + \
+            (self.char1.ability_scores.Str.current * 2) + \
+            (self.char1.ability_scores.Dex.current)))
     
     def test_if_character_cp_correct(self):
-        self.assertIsIstance(self.char1.statuses.cp.actual, int)
-        self.assetAlmostEqual(self.char1.statuses.cp.actual, ((self.char1.ability_scores.Wil.current * 5) + \
+        self.assertIsInstance(self.char1.statuses.cp.actual, int)
+        self.assertAlmostEqual(self.char1.statuses.cp.actual, ((self.char1.ability_scores.Wil.current * 5) + \
             (self.char1.ability_scores.Vit)))
+
+    def test_if_character_has_mass(self):
+        self.assertIsInstance(self.char1.statuses.mass.actual, int)
+        self.assertGreater(self.char1.statuses.mass.actual, 5)
+
+    def test_if_character_has_height(self):
+        self.assertIsInstance(self.char1.statuses.height.actual, int)
+        self.assertGreater(self.char1.statuses.height.actual, 5)
+
+    def test_if_character_has_encumberance(self):
+        self.assertIsInstance(self.char1.statuses.enc.max, float)
+        self.assertAlmostEqual(self.char1.statuses.enc.max, (self.char1.ability_scores.Str.current / 2.0))
+
+    # tests for equipment slots
+    def test_if_character_has_eq_slots(self):
+        self.assertGreater(len(self.char1.db.eq_slots), 10)
