@@ -1,0 +1,5 @@
+## This will be the gitignore file for the custom mud files repo for DOG
+# Ignore pycache
+__pycache__
+# Ignore logs
+server/logs

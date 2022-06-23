@@ -45,6 +45,11 @@ class Character(DefaultCharacter):
         """TraitHandler that manages character ability scores."""
         return TraitHandler(self, db_attribute='ability_scores')
 
+    @lazy_property
+    def statuses(self):
+        """TraitHandler that manages character statuses."""
+        return TraitHandler(self, db_attribute='statuses')
+
     def at_object_creation(self):
         "Called only at object creation and with update command."
 

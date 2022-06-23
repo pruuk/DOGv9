@@ -32,3 +32,18 @@ class TestCharacterCreation(LocalEvenniaTest):
     def test_if_character_has_cha_score(self):
         self.assertIsInstance(self.char1.ability_scores.Wil.actual, int)
         self.assertGreater(self.char1.ability_scores.Wil.actual, 0)
+
+    def test_if_character_hp_correct(self):
+        self.assertIsIstance(self.char1.statuses.hp.actual, int)
+        self.assetAlmostEqual(self.char1.statuses.hp.actual, ((self.char1.ability_scores.Vit.current * 5) + \
+            (self.char1.ability_scores.Wil.current * 2)))
+
+    def test_if_character_sp_correct(self):
+        self.assertIsIstance(self.char1.statuses.sp.actual, int)
+        self.assetAlmostEqual(self.char1.statuses.sp.actual, ((self.char1.ability_scores.Vit.current * 3) + \
+            (self.char1.ability_scores.Str.current * 2)))
+    
+    def test_if_character_cp_correct(self):
+        self.assertIsIstance(self.char1.statuses.cp.actual, int)
+        self.assetAlmostEqual(self.char1.statuses.cp.actual, ((self.char1.ability_scores.Wil.current * 5) + \
+            (self.char1.ability_scores.Vit)))
