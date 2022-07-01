@@ -10,7 +10,9 @@ creation commands.
 from evennia import DefaultCharacter
 from world.traits import TraitHandler
 from world.character_initializer import initialize_character
+from world.character_updater import update_encumberance
 from evennia.utils import lazy_property
+from evennia.utils.logger import log_file
 
 
 class Character(DefaultCharacter):
@@ -50,8 +52,22 @@ class Character(DefaultCharacter):
         """TraitHandler that manages character statuses."""
         return TraitHandler(self, db_attribute='statuses')
 
+    @lazy_property
+    def skills(self):
+        """TraitHandler that manages character skills."""
+        return TraitHandler(self, db_attribute='skills')
+
     def at_object_creation(self):
         "Called only at object creation and with update command."
-
         # call initialize_character
         initialize_character(self)
+
+    def at_get(self):
+        "Called when this object gets another object"
+        log_file(f"{self.name} picked up something.", filename="item_moves.log")
+        update_encumberance(self)
+
+    def at_drop(self):
+        "Called when this object drops an object"
+        log_file(f"{self.name} dropped something.", filename="item_moves.log")
+        update_encumberance(self)

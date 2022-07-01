@@ -71,3 +71,11 @@ def initialize_character(character):
         'primary hand': None,
         'secondary hand': None
     }
+
+    # Add in info fields needed to track changeable info about character like who they are targeting
+    character.db.info = {'Target': None, 'Mercy': True, 'Default Attack': 'unarmed_strike', \
+                        'In Combat': False, 'Position': 'standing', 'Sneaking' : False, \
+                        'Wimpy': 100, 'Yield': 200, 'Title': None}
+
+    # Add in a character wallet for storing coins
+    character.db.wallet = {'GC': 0, 'SC': 0, 'CC': 0}

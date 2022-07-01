@@ -74,12 +74,10 @@ class TestTraitFunctions(LocalEvenniaTest):
         self.assertIsInstance(self.item2.traits.all, list)
         self.assertIn('TT2', self.item2.traits.all)
 
-
     def test_all_dict(self):
         """ Test the all_dict method in TraitHandler. """
         self.assertIsInstance(self.char1.traits.all_dict, dict)
         self.assertIn('hp', self.char1.traits.all_dict.keys())
-
 
     def test_mod(self):
         """ Tests modification of an individual trait. """

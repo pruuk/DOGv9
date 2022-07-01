@@ -11,6 +11,8 @@ inheritance.
 
 """
 from evennia import DefaultObject
+from evennia import utils as utils
+from world.character_updater import update_encumberance
 
 
 class Object(DefaultObject):
@@ -159,4 +161,12 @@ class Object(DefaultObject):
 
      """
 
-    pass
+    def at_object_leave(obj, target_location):
+        """called when an object leaves this object in any fashion"""
+        if utils.inherits_from(target_location, 'typeclasses.characters.Character'):
+                update_encumberance(target_location)
+
+    def at_object_receive(obj, source_location):
+        """called when this object receives another object"""
+        if utils.inherits_from(source_location, 'typeclasses.characters.Character'):
+                update_encumberance(source_location)
